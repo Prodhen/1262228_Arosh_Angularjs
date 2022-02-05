@@ -1,0 +1,141 @@
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-4">
+            <h3>Apply Now</h3>
+
+            <form name="frmUser" novalidate>
+                <input type="hidden" ng-model="ListUser.studentID" name="uid" />
+
+                <div class="form-group">
+                    <label for="sname" class="control-label">Name</label>
+                    <input type="text" class="form-control" ng-model="studentModel.name" name="sname" placeholder="" required />
+                    <span class="error" ng-show="(frmUser.$dirty||submitted) && frmUser.uname.$error.required">name is Required</span>
+
+                </div>
+                <div class="form-group">
+                    <label for="sFather" class="control-label">Father</label>
+                    <input type="text" class="form-control" ng-model="studentModel.fatherName" name="sFather" placeholder="" required />
+                    <!--<span class="error" ng-show="(frmUser.$dirty ||submitted) && frmUser.email.$error.required">EmailId is Required!</span>
+                    <span class="error" ng-show="(frmUser.$dirty ||submitted) && frmUser.$error.email">Invalid EmailId!</span>-->
+                </div>
+                <div class="form-group">
+                    <label for="sMother" class="control-label">Mother</label>
+                    <input type="text" class="form-control" ng-model="studentModel.motherName" name="sMother" placeholder="" />
+                </div>
+                <select name="sgender" ng-model="studentModel.gender" ng-dropdown required>
+                    <option ng-option value="">Select</option>
+                    <option ng-option value="Male">Male</option>
+                    <option ng-option value="Female">Female</option>
+                    <option ng-option value="Other">Other</option>
+                </select>
+
+
+                <div class="form-group">
+                    <label for="sUnit" class="control-label">Unit</label>            
+                    <select name="sUnitID" ng-options="st.unitID as st.unitName for st in ListOrder" ng-model="studentModel.unitID" class="form-control"></select>
+                </div>
+
+                <div class="form-group">
+                    <label for="sStatus" class="control-label">Status</label>
+                    <input type="checkbox" class="form-control" ng-model="studentModel.status" name="sStatus" placeholder="" />
+                </div>
+                <div class="form-group">
+                    <label for="sDOB" class="control-label">DOB</label>
+                    <input type="date" class="form-control" ng-model="studentModel.dob" name="sDOB" placeholder="yyyy-MM-dd" min="2001-01-01" max="2022-12-31" />
+                </div>
+                <div class="form-group">
+                    <label for="sEmail" class="control-label">Email</label>
+                    <input type="email" class="form-control" ng-model="studentModel.email" name="sEmail" placeholder="" required />
+                    <!--<span class="error" ng-show="(frmUser.$dirty ||submitted) && frmUser.email.$error.required">EmailId is Required!</span>
+                    <span class="error" ng-show="(frmUser.$dirty ||submitted) && frmUser.$error.email">Invalid EmailId!</span>-->
+                </div>
+
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-danger" ng-click="reset()">Reset</button>
+                    <button type="submit" class="btn btn-primary" ng-click="saveUser()" ng-disabled="frmUser.$invalid"
+                            ng-If="studentModel.studentID == 0">
+                        Create
+                    </button>
+                    <button type="submit" class="btn btn-success" ng-click="updateUser()" ng-disabled="frmUser.$invalid"
+                            ng-If="studentModel.studentID > 0">
+                        Update
+                    </button>
+                </div>
+                <div>
+
+                </div>
+            </form>
+            <span class="warning">{{resmessage}}</span>
+
+        </div>
+        <div class="col-sm-8">
+
+            <h3>All Student</h3>
+            <center> <label>Search: <input ng-model="search"></label></center>
+            <table style="width:100%" class="table table-striped">
+                <tr>
+                    <th>Sr.</th>
+                    <th>Name</th>
+                    <th>Father</th>
+                    <th>Mother</th>
+                    <th>Gender</th>
+                    <th>Email</th>
+                    <th>Unit</th>
+                    <th>DOB</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+                <tr ng-repeat="item in ListStudent |filter:search">
+                    <td>{{ $index+1 }}</td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.fatherName }}</td>
+                    <td>{{ item.motherName }}</td>
+                    <td>{{ item.gender }}</td>
+                    <td>{{ item.email }}</td>
+                    <td>{{ item.unitID }}</td>
+                    <td>{{ item.dob |date:shortDate }}</td>
+
+                    <td>
+                        {{true == item.status ? 'Active' : 'Pending' }}
+                    </td>
+
+                    <td>
+                        <a href="#" ng-click="getUser(item)" title="Edit Record" class="btn btn-primary btn-xs pull-right">
+                            Edit
+                        </a>
+                        <a href="#" ng-click="deleteUser(item)" title="Delete Record" class="btn btn-danger btn-xs pull-right">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+                <tr style="color:red">
+                    <td></td>
+                    <td>{{ studentModel.name }}</td>
+                    <td>{{ studentModel.fatherName }}</td>
+                    <td>{{ studentModel.motherName }}</td>
+                    <td>{{ studentModel.gender }}</td>
+                    <td>{{ studentModel.email }}</td>
+                    <td>{{ studentModel.unitID }}</td>
+                    <td>{{ studentModel.dob|date:shortDate }}</td>
+                    <td>
+                        {{ studentModel.status }}
+                    </td>
+
+
+                </tr>
+            </table>
+        </div>
+
+
+
+
+
+
+    </div>
+
+
+
+
+</div>

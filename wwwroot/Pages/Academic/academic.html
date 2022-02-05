@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html ng-app="MainModule">
+<head>
+    <meta charset="utf-8" />
+    <title>Product</title>
+    <script src="../../js/angular.min.js"></script>
+    <script src="../../js/MyScript/Academic.Controller.js"></script>
+
+</head>
+<body ng-controller="ProductCtrl">
+    <br />
+    <br />
+
+    <div class="container container-fluid">
+        <table>
+            <tr>
+                <td>
+                    <input type="text" ng-model="objProduct.academicResultID" hidden />
+                    <input type="text" class="form-control" placeholder="Roll No" ng-model="objProduct.rollNo" />
+                </td>
+                <td>
+                    <input type="text" class="form-control" placeholder="Exam" ng-model="objProduct.examination" />
+                </td>
+                <td>
+                    <input type="text" class="form-control" placeholder="Result" ng-model="objProduct.result" />
+                </td>
+                <td>
+                    <input type="text" class="form-control" placeholder="Group" ng-model="objProduct.group" />
+                </td>
+                <td>
+                    <input type="text" class="form-control" placeholder="Passing Year" ng-model="objProduct.passingYear" />
+                </td>
+                <td>
+                <td>
+                    <button ng-click="SaveProduct()">Save</button>
+                    <button ng-click="UpdateProduct()">Update</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div>
+        <table class="table">
+            <tr>
+                <!--<td>orderID</td>-->
+                <td>Roll</td>
+                <td>Exam</td>
+                <td>Result</td>
+                <td>Group</td>
+                <td>Year</td>
+
+                <td></td>
+            </tr>
+            <tr ng-repeat="p in ProductList">
+                <td>{{p.rollNo}}</td>
+                <td>{{p.examination}}</td>
+                <td>{{p.result}}</td>
+                <td>{{p.group}}</td>
+                <td>{{p.passingYear}}</td>
+
+                <td>
+                    <button ng-click="EditProduct(p)">Edit</button>
+                    <button ng-click="DeleteProduct(p.academicResultID)">Delete</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,82 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-4">
+            <h3>Add New Unit</h3>
+
+            <form name="frmunit" novalidate>
+                <input type="hidden" ng-model="unitModel.unitID" name="uid" />
+
+                <div class="form-group">
+                    <label for="sname" class="control-label">Unit</label>
+                    <input type="text" class="form-control" ng-model="unitModel.unitName" name="sname" placeholder="" required />
+                    <span class="error" ng-show="(frmunit.$dirty||submitted) && frmunit.uname.$error.required">name is Required</span>
+
+                </div>
+                <div class="form-group">
+                    <label for="sFather" class="control-label">Seat</label>
+                    <input type="text" class="form-control" ng-model="unitModel.seat" name="sFather" placeholder="" required />
+                    <!--<span class="error" ng-show="(frmunit.$dirty ||submitted) && frmunit.email.$error.required">EmailId is Required!</span>
+                    <span class="error" ng-show="(frmunit.$dirty ||submitted) && frmunit.$error.email">Invalid EmailId!</span>-->
+                </div>
+
+
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-danger" ng-click="reset()">Reset</button>
+                    <button type="submit" class="btn btn-primary" ng-click="saveUnit()" ng-disabled="frmunit.$invalid"
+                            ng-If="unitModel.unitID == 0">
+                        Create
+                    </button>
+                    <button type="submit" class="btn btn-success" ng-click="updateUnit()" ng-disabled="frmunit.$invalid"
+                            ng-If="unitModel.unitID > 0">
+                        Update
+                    </button>
+                </div>
+                <div>
+
+                </div>
+            </form>
+            <span class="warning">{{resmessage}}</span>
+
+        </div>
+        <div class="col-sm-8">
+            <h3>All unit</h3>
+            <table style="width:100%" class="table table-striped">
+                <tr>
+                    <th>Sr.</th>
+                    <th>Name</th>
+                    <th>Seat</th>
+
+                    <th></th>
+                </tr>
+                <tr ng-repeat="item in ListUnit">
+                    <td>{{ $index+1 }}</td>
+                    <td>{{ item.unitName }}</td>
+                    <td>{{ item.seat }}</td>
+
+                    <td>
+                        <a href="#" ng-click="getUnit(item)" title="Edit Record" class="btn btn-primary btn-xs pull-right">
+                            Edit
+                        </a>
+                        <a href="#" ng-click="deleteUnit(item)" title="Delete Record" class="btn btn-danger btn-xs pull-right">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+                <tr style="color:red">
+                    <td></td>
+                    <td>{{ unitModel.unitName }}</td>
+                    <td>{{ unitModel.seat }}</td>
+
+
+                </tr>
+            </table>
+        </div>
+
+
+
+
+
+
+    </div>
+</div>
